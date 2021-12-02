@@ -2,6 +2,7 @@ package aggregate
 
 import (
 	"github_api/api"
+	"reflect"
 	"testing"
 )
 
@@ -51,5 +52,19 @@ func TestAggregator_AggregateUser(t *testing.T) {
 		t.Error(err)
 	}
 
-	expected, err := client
+	expected := &UserAggregation{
+		Username:       "testuser",
+		ReposCount:     2,
+		FollowersCount: 5,
+		ForksCount:     0,
+		LanguageDistribution: langDistribution{
+			"Go":   float64(5) / float64(12),
+			"Java": float64(6) / float64(12),
+			"C++":  float64(1) / float64(12),
+		},
+	}
+
+	if !reflect.DeepEqual(actual, expected) {
+		t.Error(actual, expected)
+	}
 }
