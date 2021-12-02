@@ -1,1 +1,1 @@
-A tool to print reports about GitHub users
+A tool to print reports about GitHub users.
